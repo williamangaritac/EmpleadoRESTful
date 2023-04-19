@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
-import java.time.LocalDate;
 
+/**
+ * Clase que representa el modelo de la entidad de objeto @Empleado
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,6 +15,9 @@ import java.time.LocalDate;
 @Table (name = "empleado")
 public class Empleado {
 
+    /**
+     * El id es declarado autoincrementable y unico y no puede ser nulo
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true, nullable = false)
@@ -48,6 +53,4 @@ public class Empleado {
     @Column(name = "edad_actual")
     private String edad_actual;
 
-    public Empleado(String pedro, String gonzález, String cédula, String s, LocalDate of, LocalDate of1, String analista, double v) {
-    }
 }

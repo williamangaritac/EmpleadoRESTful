@@ -3,6 +3,7 @@ package com.EmpleadoREST.Servicio;
 /**
  * Importaciones de dependencias y Anotaciones Tipo Decoradores
  */
+
 import com.EmpleadoREST.Modelo.Empleado;
 import com.EmpleadoREST.Repo.EmpleadoRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,8 @@ import java.time.LocalDate;
 import java.time.Period;
 
 /***
- * Esta es una clase basado en modelo arquitectura MVC en java 11
- * Esta es la Clase @Empleado servicio+ que implementa la logica y las validaciones del backend
+ * Esta es una clase basada en modelo arquitectura MVC en java 11 y Spring Boot
+ * Esta es la Clase @Empleado servicio que implementa la logica y las validacions del backend
  * @author: William Angarita
  */
 
@@ -25,30 +26,40 @@ public class EmpleadoServicio {
      */
     @Autowired
     public EmpleadoRepositorio empleadoRepositorio;
-    
-    @Autowired
-    public EmpleadoRepositorio empleadoRepositorio() {
-        return empleadoRepositorio;
-    }
 
     /**
-     * Agregar datos de prueba
+     * Se inicia la logica del service Agregando 2 objeto Empleado de prueba inicial
      */
-
-    //Revisar postconstruct
     @PostConstruct
-    public void agregarDatosDePrueba() {
-        empleadoRepositorio = empleadoRepositorio();
-        Empleado emp1 = new Empleado("Pedro", "González", "Cédula", "234567890", LocalDate.of(1995, 5, 20),
-                LocalDate.of(2018, 7, 1), "Analista", 3000.00);
-        empleadoRepositorio.save(emp1);
+    public void cargarDatosDePrueba() {
+        Empleado empleado1 = new Empleado();
+        empleado1.setNombres("Luis");
+        empleado1.setApellidos("González");
+        empleado1.setTipo_documento("Cédula");
+        empleado1.setNumero_documento("123456789");
+        LocalDate fechaNacimiento = LocalDate.parse("1988-03-20");
+        empleado1.setFecha_nacimiento(String.valueOf(fechaNacimiento));
+        LocalDate fechaVinculacion = LocalDate.parse("2016-09-01");
+        empleado1.setFecha_vinculacion(String.valueOf(fechaVinculacion));
+        empleado1.setCargo("Analista");
+        empleado1.setSalario(3500.00);
 
-        Empleado emp2 = new Empleado("Ana", "Martínez", "Pasaporte", "A1234567", LocalDate.of(1988, 9, 14),
-                LocalDate.of(2009, 3, 15), "Gerente de Ventas", 6000.00);
-        empleadoRepositorio.save(emp2);
+        Empleado empleado2 = new Empleado();
+        empleado2.setNombres("María");
+        empleado2.setApellidos("García");
+        empleado2.setTipo_documento("Cédula");
+        empleado2.setNumero_documento("987654321");
+        LocalDate fechaNacimiento2 = LocalDate.parse("1990-02-15");
+        empleado2.setFecha_nacimiento(String.valueOf(fechaNacimiento2));
+        LocalDate fechaVinculacion2 = LocalDate.parse("2018-01-01");
+        empleado2.setFecha_vinculacion(String.valueOf(fechaVinculacion2));
+        empleado2.setCargo("Desarrollador");
+        empleado2.setSalario(4500.00);
+
+        agregarEmpleado(empleado1);
+        agregarEmpleado(empleado2);
     }
-
-    /**
+   /**
      * Metodo que reune los submetodos con las validaciones requeridas
      * @param empleado
      * @return empleado
@@ -92,8 +103,7 @@ public class EmpleadoServicio {
      * @param empleado de tipo @Empleado
      * @return 
      */
-  
-    private void validarEmpleado(Empleado empleado) {
+      private void validarEmpleado(Empleado empleado) {
         if (empleado.getNombres() == null || empleado.getNombres().isEmpty()) {
             throw new RuntimeException("El nombre del empleado es requerido");
         }
@@ -119,9 +129,9 @@ public class EmpleadoServicio {
             throw new RuntimeException("El salario del empleado es requerido");
         }
 
+        // Creacion de variable para parsear string a objeto LocaDate para manejo de fechas con norma IOS 8601 "2007-12-03"
         LocalDate fechaNacimiento = LocalDate.parse(empleado.getFecha_nacimiento());
 
-        
         /**
          * Validacion para comprobar si empleado es mayor de edad 18años
          * @param fechaNacimiento
