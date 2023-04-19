@@ -1,45 +1,40 @@
 # EmpleadoRESTful
-
 API RESTful con Java 11 y Spring Boot
 Este proyecto es una API (Get - POST) que implementa una API RESTful para realizar operaciones CRUD (Crear, Leer) sobre una base de datos MYSQL para un objeto Empleado. La aplicación está escrita en Java 11 y utiliza el framework de Spring Boot.
 
-Requisitos
+-----------
+Requisitos 
 Para ejecutar la aplicación, se requiere lo siguiente:
-
 Java Development Kit (JDK) 11 o superior
 Maven 3.6.0 o superior
-Instalación y configuración
+
+-----------
+Configuración y Uso
 Clonar el repositorio de GitHub:
-bash
-Copy code
-git clone https://github.com/tu_usuario/tu_proyecto.git
-Ingresar a la carpeta del proyecto:
-bash
-Copy code
-cd tu_proyecto
-Compilar el proyecto:
-Copy code
-mvn clean install
-Ejecutar la aplicación:
-arduino
-Copy code
-mvn spring-boot:run
-La aplicación se ejecutará en el puerto 8080. Para acceder a la API, utiliza la siguiente URL: http://localhost:8080/api/users.
+     "git@github.com:williamangaritac/EmpleadoRESTful.git"
 
-Endpoints disponibles
-La aplicación implementa los siguientes endpoints:
+crear una DB en MySQL con el siguiente comando "Aqui se uso phpMyAdmin":
+query en MYSQL: CREATE DATABASE empleado_rest;
 
-GET /api/users: Retorna una lista de todos los usuarios.
-GET /api/users/{id}: Retorna un usuario por su ID.
-POST /api/users: Crea un nuevo usuario.
-PUT /api/users/{id}: Actualiza un usuario existente.
-DELETE /api/users/{id}: Elimina un usuario existente.
-Tecnologías utilizadas
-Java 11
-Spring Boot 2.5.4
-Spring Data JPA
-MYSQL
-Maven
+La aplicación se ejecutará en el puerto 8080. Para acceder a la API:
+Para GET Y POST Endpoints disponibles: 
+URL: http://localhost:8080/empleado/empleados/
+
+-----------
+Consumo Con POSTMAN en solicitud POST
+http://localhost:8080/empleado/empleados/
+ejemplo JSON a consumir 
+"{
+    "nombres": "brayan",
+    "apellidos": "avendaño",
+    "tipo_documento": "Cédula",
+    "numero_documento": "123456789",
+    "fecha_nacimiento": "1992-03-20",
+    "fecha_vinculacion": "2019-09-01",
+    "cargo": "Analista",
+    "salario": 2500.00"
+    
+-----------
 Contribuciones
 Si deseas contribuir a este proyecto, puedes hacer lo siguiente:
 
