@@ -13,16 +13,19 @@ import java.time.Period;
 
 /***
  * Esta es una clase basado en modelo arquitectura MVC en java 11
- * ES es la clase @Empleado servicio que implementa la logica y las validaciones del backend
+ * Esta es la Clase @Empleado servicio+ que implementa la logica y las validaciones del backend
+ * @author: William Angarita
  */
+
 @Service
 public class EmpleadoServicio {
 
     /***
-     * Implementacion del concepto inyeccion de dependencias de roro
+     * Implementacion del concepto inyeccion de dependencias
      */
     @Autowired
     public EmpleadoRepositorio empleadoRepositorio;
+    
     @Autowired
     public EmpleadoRepositorio empleadoRepositorio() {
         return empleadoRepositorio;
@@ -45,7 +48,11 @@ public class EmpleadoServicio {
         empleadoRepositorio.save(emp2);
     }
 
-    /// Metodo que reune los submetodos con las validaciones requeridas
+    /**
+     * Metodo que reune los submetodos con las validaciones requeridas
+     * @param empleado
+     * @return empleado
+    */
     public Empleado agregarEmpleado(Empleado empleado) {
         validarEmpleado(empleado);
         calcularTiempoVinculacion(empleado);
@@ -54,11 +61,10 @@ public class EmpleadoServicio {
     }
 
     /**
-     * @author: William Angarita
+     * Metodo para calcular la edad del Empleado
      * @param empleado
      * @return
-     */
-    /// metodo calcula la edad empleado
+     */    
     private void calcularEdadActual(Empleado empleado) {
         LocalDate fechaNacimiento = LocalDate.parse(empleado.getFecha_nacimiento());
         LocalDate fechaActual = LocalDate.now();
@@ -66,6 +72,12 @@ public class EmpleadoServicio {
         empleado.setEdad_actual(periodo.getYears() + " años, " + periodo.getMonths() + " meses, " + periodo.getDays() + " días");
     }
 
+     /**
+     * Metodo para calcular el tiempo de vinculacion usando la clase @param LocalDate
+     * @param empleado
+     * @param periodo
+     * @return empleado Period
+     */  
     private void calcularTiempoVinculacion(Empleado empleado) {
         LocalDate fechaVinculacion = LocalDate.parse(empleado.getFecha_vinculacion());
         LocalDate fechaActual = LocalDate.now();
@@ -75,7 +87,12 @@ public class EmpleadoServicio {
         empleado.setTiempo_vinculacion(periodoVinculacion.getYears() + " años, " + periodoVinculacion.getMonths() + " meses, " + periodoVinculacion.getDays() + " días");
     }
 
-    /// Metodo Validacion de atributos no vacios
+    /**
+     * Metodo Validacion de atributos no vacios
+     * @param empleado de tipo @Empleado
+     * @return 
+     */
+  
     private void validarEmpleado(Empleado empleado) {
         if (empleado.getNombres() == null || empleado.getNombres().isEmpty()) {
             throw new RuntimeException("El nombre del empleado es requerido");
@@ -104,7 +121,12 @@ public class EmpleadoServicio {
 
         LocalDate fechaNacimiento = LocalDate.parse(empleado.getFecha_nacimiento());
 
-        /// Validacion para comprobar si empleado es mayor de edad 18años,
+        
+        /**
+         * Validacion para comprobar si empleado es mayor de edad 18años
+         * @param fechaNacimiento
+         * @return boolean
+         */
         if (fechaNacimiento.plusYears(18).isAfter(LocalDate.now())) {
             throw new RuntimeException("El empleado debe ser mayor de edad");
         }
