@@ -25,12 +25,13 @@ public class EmpleadoRest {
     /**
      * Metodo GET para obtener la lista completa de objetos Empleado creada en la base de datos MYSQL
      * @return eobjeto empleados con un http 200
-     */
+     */    
      @GetMapping("/empleados/")
     public ResponseEntity<List<Empleado>> buscarEmpleados() {
         List<Empleado> empleados = empleadoServicio.empleadoRepositorio.findAll();
         return ResponseEntity.ok(empleados);
     }
+
     /**
      * Metodo POST para obtener la lista completade atributos
      * de objetos Empleado con las validaciones requeridas de
