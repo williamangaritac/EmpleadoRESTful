@@ -19,7 +19,7 @@ import java.time.Period;
 public class EmpleadoServicio {
 
     /***
-     * Implementacion del concepto inyeccion de dependencias
+     * Implementacion del concepto inyeccion de dependencias de roro
      */
     @Autowired
     public EmpleadoRepositorio empleadoRepositorio;
