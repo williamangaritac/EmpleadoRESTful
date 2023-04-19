@@ -7,15 +7,15 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
-@Entity
-@Table (name = "empleado")
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table (name = "empleado")
 public class Empleado {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    // @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false)
     private Long id;
 
     @Column(name = "nombres")
