@@ -1,22 +1,38 @@
 package com.EmpleadoREST.Servicio;
 
+/**
+ * Importaciones de dependencias y Anotaciones Tipo Decoradores
+ */
 import com.EmpleadoREST.Modelo.Empleado;
 import com.EmpleadoREST.Repo.EmpleadoRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.List;
 
+/***
+ * Esta es una clase basado en modelo arquitectura MVC en java 11
+ * ES es la clase @Empleado servicio que implementa la logica y las validaciones del backend
+ */
 @Service
 public class EmpleadoServicio {
 
+    /***
+     * Implementacion del concepto inyeccion de dependencias
+     */
     @Autowired
     public EmpleadoRepositorio empleadoRepositorio;
+    @Autowired
+    public EmpleadoRepositorio empleadoRepositorio() {
+        return empleadoRepositorio;
+    }
 
-    // Agregar datos de prueba
+    /**
+     * Agregar datos de prueba
+     */
+
+    //Revisar postconstruct
     @PostConstruct
     public void agregarDatosDePrueba() {
         empleadoRepositorio = empleadoRepositorio();
@@ -29,12 +45,6 @@ public class EmpleadoServicio {
         empleadoRepositorio.save(emp2);
     }
 
-    @Autowired
-    public EmpleadoRepositorio empleadoRepositorio() {
-        return empleadoRepositorio;
-    }
-
-
     /// Metodo que reune los submetodos con las validaciones requeridas
     public Empleado agregarEmpleado(Empleado empleado) {
         validarEmpleado(empleado);
@@ -46,6 +56,7 @@ public class EmpleadoServicio {
     /**
      * @author: William Angarita
      * @param empleado
+     * @return
      */
     /// metodo calcula la edad empleado
     private void calcularEdadActual(Empleado empleado) {
